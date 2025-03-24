@@ -1,0 +1,197 @@
+<!-- Agrega el enlace de Font Awesome en el index.html o aquí, según prefieras -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<app-aside></app-aside>
+
+<main>
+  <div class="main-container">
+    <div class="header-bar">
+      <h1 class="page-title"><i class="fas fa-clipboard-check"></i> Control de Asistencias</h1>
+      <div class="header-actions">
+        <button class="btn btn-primary"><i class="fas fa-file-export"></i> Exportar</button>
+        <button class="btn btn-success"><i class="fas fa-file-pdf"></i> Generar Reporte</button>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="content-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-filter"></i> Filtros</h2>
+      </div>
+      <div class="filter-container search-box">
+        <div class="filter-item">
+          <label class="filter-label">Departamento</label>
+          <select class="filter-select">
+            <option>Todos</option>
+            <option>Ingeniería</option>
+            <option>Ciencias Básicas</option>
+            <option>Humanidades</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">Período</label>
+          <select class="filter-select">
+            <option>Enero-Junio 2025</option>
+            <option>Agosto-Diciembre 2024</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">Desde</label>
+          <input type="date" class="filter-select" value="2025-01-01">
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">Hasta</label>
+          <input type="date" class="filter-select" value="2025-03-23">
+        </div>
+        <div class="filter-item">
+          <label class="filter-label">&nbsp;</label>
+          <button class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="content-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-chart-pie"></i> Estadísticas</h2>
+        <div class="section-actions">
+          <!-- Vinculamos el botón con la función actualizarGraficas() -->
+          <button (click)="actualizarGraficas()" class="btn btn-secondary"><i class="fas fa-sync-alt"></i> Actualizar</button>
+        </div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-box">
+          <h3 class="chart-title">Asistencias por Profesor</h3>
+          <!-- Contenedor para la gráfica de barras con referencia -->
+          <div class="bar-chart" #barChartContainer style="height: 300px;">
+            Gráfica de barras - Porcentaje de asistencia por profesor
+          </div>
+        </div>
+        <div class="chart-box">
+          <h3 class="chart-title">Tipos de Inasistencias</h3>
+          <!-- Contenedor para la gráfica circular con referencia -->
+          <div class="pie-chart" #pieChartContainer style="height: 300px;">
+            Gráfica circular - Distribución de tipos de inasistencias
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Asistencias -->
+    <div class="content-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Registro de Asistencias</h2>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Buscar profesor..." class="form-control">
+        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="tab-container">
+        <div class="tabs">
+          <div class="tab active">Todos</div>
+          <div class="tab">Asistencias</div>
+          <div class="tab">Inasistencias</div>
+          <div class="tab">Con justificación</div>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Profesor</th>
+              <th>Materia</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Estado</th>
+              <th>Justificación</th>
+              <th>Registrado por</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dr. Juan Pérez</td>
+              <td>Cálculo Diferencial</td>
+              <td>23/03/2025</td>
+              <td>08:00 - 10:00</td>
+              <td><span class="status-badge status-active">Asistió</span></td>
+              <td>-</td>
+              <td>María Gómez (Jefe de Grupo)</td>
+            </tr>
+            <tr>
+              <td>Mtra. Laura Sánchez</td>
+              <td>Álgebra Lineal</td>
+              <td>22/03/2025</td>
+              <td>12:00 - 14:00</td>
+              <td><span class="status-badge status-inactive">No asistió</span></td>
+              <td>Sin justificación</td>
+              <td>Pedro Ramírez (Checador)</td>
+            </tr>
+            <tr>
+              <td>Dr. Roberto Martínez</td>
+              <td>Física I</td>
+              <td>21/03/2025</td>
+              <td>10:00 - 12:00</td>
+              <td><span class="status-badge status-inactive">No asistió</span></td>
+              <td><span class="status-badge status-justified">Con justificación</span></td>
+              <td>Ana López (Jefe de Grupo)</td>
+            </tr>
+            <tr>
+              <td>Mtro. Carlos Gutiérrez</td>
+              <td>Programación</td>
+              <td>21/03/2025</td>
+              <td>16:00 - 18:00</td>
+              <td><span class="status-badge status-active">Asistió</span></td>
+              <td>-</td>
+              <td>Luis Torres (Checador)</td>
+            </tr>
+            <tr>
+              <td>Dra. Susana Díaz</td>
+              <td>Química</td>
+              <td>20/03/2025</td>
+              <td>14:00 - 16:00</td>
+              <td><span class="status-badge status-active">Asistió</span></td>
+              <td>-</td>
+              <td>Josefina Vázquez (Jefe de Grupo)</td>
+            </tr>
+            <tr>
+              <td>Dr. Antonio Morales</td>
+              <td>Ecuaciones Diferenciales</td>
+              <td>20/03/2025</td>
+              <td>18:00 - 20:00</td>
+              <td><span class="status-badge status-inactive">No asistió</span></td>
+              <td><span class="status-badge status-justified">Con justificación</span></td>
+              <td>Roberto Méndez (Checador)</td>
+            </tr>
+            <tr>
+              <td>Mtra. Elena Ramos</td>
+              <td>Inglés Técnico</td>
+              <td>19/03/2025</td>
+              <td>08:00 - 10:00</td>
+              <td><span class="status-badge status-active">Asistió</span></td>
+              <td>-</td>
+              <td>Carmen Ortiz (Jefe de Grupo)</td>
+            </tr>
+            <tr>
+              <td>Dr. Miguel Ángel Vargas</td>
+              <td>Cálculo Integral</td>
+              <td>19/03/2025</td>
+              <td>12:00 - 14:00</td>
+              <td><span class="status-badge status-inactive">No asistió</span></td>
+              <td>Sin justificación</td>
+              <td>Fernando Juárez (Checador)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <div class="page-link"><i class="fas fa-angle-double-left"></i></div>
+        <div class="page-link"><i class="fas fa-angle-left"></i></div>
+        <div class="page-link active">1</div>
+        <div class="page-link">2</div>
+        <div class="page-link">3</div>
+        <div class="page-link"><i class="fas fa-angle-right"></i></div>
+        <div class="page-link"><i class="fas fa-angle-double-right"></i></div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,336 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="body">
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-clipboard-check"></i>
+                <h1>Sistema de Checador Académico</h1>
+            </div>
+            <div class="user-info">
+                <img src="/api/placeholder/40/40" alt="Usuario">
+                <div>
+                    <div class="name">Administrador García</div>
+                    <div class="role">Checador Académico</div>
+                </div>
+            </div>
+        </header>
+    
+        <div class="selection-panel">
+            <div class="select-container">
+                <label for="carrera">Carrera:</label>
+                <select id="carrera">
+                    <option value="">Seleccionar Carrera</option>
+                    <option value="ing">Ingeniería en Sistemas</option>
+                    <option value="admin">Administración de Empresas</option>
+                    <option value="cont">Contabilidad</option>
+                    <option value="derecho">Derecho</option>
+                    <option value="medicina">Medicina</option>
+                    <option value="arquitectura">Arquitectura</option>
+                    <option value="psicologia">Psicología</option>
+                </select>
+            </div>
+            <div class="select-container">
+                <label for="grupo">Grupo:</label>
+                <select id="grupo">
+                    <option value="">Seleccionar Grupo</option>
+                    <option value="101">Grupo 101</option>
+                    <option value="102">Grupo 102</option>
+                    <option value="201">Grupo 201</option>
+                    <option value="202">Grupo 202</option>
+                    <option value="301">Grupo 301</option>
+                    <option value="302">Grupo 302</option>
+                    <option value="401">Grupo 401</option>
+                    <option value="402">Grupo 402</option>
+                </select>
+            </div>
+            <div class="select-container">
+                <label for="profesor">Profesor:</label>
+                <select id="profesor">
+                    <option value="">Todos los Profesores</option>
+                    <option value="martinez">Prof. Martínez</option>
+                    <option value="rodriguez">Prof. Rodríguez</option>
+                    <option value="lopez">Prof. López</option>
+                    <option value="garcia">Prof. García</option>
+                    <option value="hernandez">Prof. Hernández</option>
+                </select>
+            </div>
+            <div class="select-container">
+                <label for="aula">Aula:</label>
+                <select id="aula">
+                    <option value="">Todas las Aulas</option>
+                    <option value="aula101">Aula 101</option>
+                    <option value="aula102">Aula 102</option>
+                    <option value="aula201">Aula 201</option>
+                    <option value="aula202">Aula 202</option>
+                    <option value="aula301">Aula 301</option>
+                    <option value="aula302">Aula 302</option>
+                    <option value="lab101">Laboratorio 101</option>
+                    <option value="lab102">Laboratorio 102</option>
+                    <option value="lab201">Laboratorio 201</option>
+                    <option value="aula-magna">Aula Magna</option>
+                    <option value="auditorio">Auditorio</option>
+                </select>
+            </div>
+        </div>
+    
+        <div class="current-week">
+            <div class="title">
+                <i class="fas fa-calendar-week"></i>
+                Semana Actual
+            </div>
+            <div class="dates">Feb 24 - Feb 28, 2025</div>
+        </div>
+    
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th class="time-col">Hora</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-col">7:00 - 8:30</td>
+                    <td>
+                        <div class="class-block subject-math">
+                            <div class="class-name">Matemáticas I</div>
+                            <div class="class-details">Grupo 101</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 201
+                            </div>
+                            <div class="class-details">Prof. Martínez</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">Libre</td>
+                    <td>
+                        <div class="class-block subject-math">
+                            <div class="class-name">Matemáticas I</div>
+                            <div class="class-details">Grupo 101</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 201
+                            </div>
+                            <div class="class-details">Prof. Martínez</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">Libre</td>
+                    <td>
+                        <div class="class-block subject-math">
+                            <div class="class-name">Matemáticas I</div>
+                            <div class="class-details">Grupo 101</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 201
+                            </div>
+                            <div class="class-details">Prof. Martínez</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time-col">8:30 - 10:00</td>
+                    <td>
+                        <div class="class-block subject-science">
+                            <div class="class-name">Física Básica</div>
+                            <div class="class-details">Grupo 203</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Lab 101
+                            </div>
+                            <div class="class-details">Prof. Rodríguez</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="class-block subject-science">
+                            <div class="class-name">Física Básica</div>
+                            <div class="class-details">Grupo 203</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Lab 101
+                            </div>
+                            <div class="class-details">Prof. Rodríguez</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">Libre</td>
+                    <td>
+                        <div class="class-block subject-science">
+                            <div class="class-name">Física Básica</div>
+                            <div class="class-details">Grupo 203</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Lab 101
+                            </div>
+                            <div class="class-details">Prof. Rodríguez</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">Libre</td>
+                </tr>
+                <tr>
+                    <td class="time-col">10:00 - 11:30</td>
+                    <td class="empty-cell">Libre</td>
+                    <td>
+                        <div class="class-block subject-language">
+                            <div class="class-name">Español Avanzado</div>
+                            <div class="class-details">Grupo 304</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 205
+                            </div>
+                            <div class="class-details">Prof. López</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="class-block subject-language">
+                            <div class="class-name">Español Avanzado</div>
+                            <div class="class-details">Grupo 304</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 205
+                            </div>
+                            <div class="class-details">Prof. López</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="class-block subject-language">
+                            <div class="class-name">Español Avanzado</div>
+                            <div class="class-details">Grupo 304</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 205
+                            </div>
+                            <div class="class-details">Prof. López</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">Libre</td>
+                </tr>
+                <tr>
+                    <td class="time-col">11:30 - 13:00</td>
+                    <td>
+                        <div class="class-block subject-social">
+                            <div class="class-name">Historia Universal</div>
+                            <div class="class-details">Grupo 405</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 301
+                            </div>
+                            <div class="class-details">Prof. García</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">Libre</td>
+                    <td class="empty-cell">Libre</td>
+                    <td>
+                        <div class="class-block subject-social">
+                            <div class="class-name">Historia Universal</div>
+                            <div class="class-details">Grupo 405</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 301
+                            </div>
+                            <div class="class-details">Prof. García</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="class-block subject-social">
+                            <div class="class-name">Historia Universal</div>
+                            <div class="class-details">Grupo 405</div>
+                            <div class="class-location">
+                                <i class="fas fa-map-marker-alt"></i> Aula 301
+                            </div>
+                            <div class="class-details">Prof. García</div>
+                            <div class="attendance-status">
+                                <button class="attendance-button attend-btn">Asistió</button>
+                                <button class="attendance-button absent-btn">Faltó</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <div class="action-buttons">
+            <button class="action-btn save-btn">
+                <i class="fas fa-save"></i>
+                Guardar Asistencias
+            </button>
+            <button class="action-btn report-btn">
+                <i class="fas fa-file-export"></i>
+                Generar Reporte
+            </button>
+        </div>
+    
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-value">90%</div>
+                <div class="stat-label">Asistencia Promedio</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-value">15/18</div>
+                <div class="stat-label">Clases Marcadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Clases con Baja Asistencia</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="stat-value">5</div>
+                <div class="stat-label">Profesores Activos</div>
+            </div>
+        </div>
+    
+        <div class="footer">
+            Sistema de Checador Académico v1.0 | © 2025 Universidad Ejemplo
+        </div>
+    </div>
+</div>
+
+

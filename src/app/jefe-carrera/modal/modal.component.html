@@ -1,0 +1,114 @@
+<!-- Modal para agregar/editar jefe de grupo -->
+<div *ngIf="showModalJefe" class="modal" [ngClass]="{'active': showModalJefe, 'closing': closingJefe}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fas fa-user-tie"></i> Agregar Jefe de Grupo</h3>
+        <button class="modal-close" (click)="closeModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="jefe-nombre">Nombre</label>
+            <input type="text" id="jefe-nombre" class="form-control">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="form-group">
+            <label for="jefe-apellidos">Apellidos</label>
+            <input type="text" id="jefe-apellidos" class="form-control">
+            <i class="fas fa-user-tag"></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="jefe-carrera">Carrera</label>
+            <input type="text" id="jefe-carrera" class="form-control">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="form-group">
+            <label for="jefe-grupo">Grupo</label>
+            <input type="text" id="jefe-grupo" class="form-control">
+            <i class="fas fa-users"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="jefe-email">Correo Electrónico</label>
+          <input type="email" id="jefe-email" class="form-control">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="form-group">
+          <label for="jefe-estado">Estado</label>
+          <select id="jefe-estado" class="form-control">
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+            <option value="pendiente">Pendiente</option>
+          </select>
+          <i class="fas fa-toggle-on"></i>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">
+          <i class="fas fa-times-circle"></i> Cancelar
+        </button>
+        <button class="btn btn-primary">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal para agregar/editar checador -->
+  <div *ngIf="showModalChecador" class="modal" [ngClass]="{'active': showModalChecador, 'closing': closingChecador}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fas fa-clipboard-check"></i> Agregar Checador</h3>
+        <button class="modal-close" (click)="closeModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="checador-nombre">Nombre</label>
+            <input type="text" id="checador-nombre" class="form-control">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="form-group">
+            <label for="checador-apellidos">Apellidos</label>
+            <input type="text" id="checador-apellidos" class="form-control">
+            <i class="fas fa-user-tag"></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="checador-area">Área</label>
+            <input type="text" id="checador-area" class="form-control">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="form-group">
+            <label for="checador-responsabilidad">Responsabilidad</label>
+            <input type="text" id="checador-responsabilidad" class="form-control">
+            <i class="fas fa-tasks"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="checador-email">Correo Electrónico</label>
+          <input type="email" id="checador-email" class="form-control">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="form-group">
+          <label for="checador-estado">Estado</label>
+          <select id="checador-estado" class="form-control">
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+          <i class="fas fa-toggle-on"></i>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">
+          <i class="fas fa-times-circle"></i> Cancelar
+        </button>
+        <button class="btn btn-primary">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+      </div>
+    </div>
+  </div>

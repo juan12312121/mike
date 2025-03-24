@@ -1,0 +1,353 @@
+
+.con {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.attendance-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .attendance-buttons button {
+    flex-grow: 1;
+    margin: 0 2px;
+    padding: 4px 8px;
+    font-size: 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn-attended {
+    background-color: #4caf50;
+    color: white;
+  }
+  .btn-not-attended {
+    background-color: #f44336;
+    color: white;
+  }
+  .btn-topic {
+    background-color: #2196f3;
+    color: white;
+  }
+  .topic-input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 20px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 32px;
+    color: #4b6cb7;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info .name {
+    font-weight: bold;
+    color: #333;
+}
+
+.user-info .role {
+    color: #777;
+    font-size: 14px;
+}
+
+.week-container {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.week-header {
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    color: white;
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.week-header:hover {
+    background: linear-gradient(to right, #3a589e, #0f1a33);
+}
+
+.week-header .title {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.week-header .title i {
+    margin-right: 10px;
+}
+
+.week-header .dates {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.week-header .toggle-icon {
+    transform: rotate(0deg);
+    transition: transform 0.3s;
+}
+
+.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.week-content {
+    background-color: white;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+.active .week-content {
+    max-height: 1500px;
+    transition: max-height 0.5s ease-in;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.schedule-table th {
+    background-color: #f5f5f5;
+    padding: 12px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    border: 1px solid #e0e0e0;
+}
+
+.schedule-table .time-col {
+    width: 120px;
+    text-align: center;
+}
+
+.schedule-table td {
+    padding: 15px 10px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    vertical-align: top;
+    height: 100px;
+}
+
+.class-block {
+    background-color: #e8f4fe;
+    border-left: 4px solid #4b6cb7;
+    padding: 8px;
+    margin-bottom: 5px;
+    text-align: left;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.class-block .class-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+.class-block .class-details {
+    color: #666;
+    font-size: 12px;
+}
+
+.class-block .class-location {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    color: #777;
+    font-size: 12px;
+}
+
+.class-block .class-location i {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+
+.subject-ma1 {
+    background-color: #ffedd8;
+    border-left-color: #ff9800;
+}
+
+.subject-ma2 {
+    background-color: #e8f4fe;
+    border-left-color: #2196f3;
+}
+
+.subject-ma3 {
+    background-color: #ebf7ee;
+    border-left-color: #4caf50;
+}
+
+.subject-ma4 {
+    background-color: #ffe8f0;
+    border-left-color: #e91e63;
+}
+
+
+.empty-cell {
+    background-color: #f9f9f9;
+    color: #aaa;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .week-header {
+        padding: 10px 15px;
+    }
+
+    .schedule-table th,
+    .schedule-table td {
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+
+    .controller {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .filters {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+}
+
+.logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.logout-btn i {
+    margin-right: 8px;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+.logout-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 99, 71, 0.6);
+}
+
+.logout-btn:active {
+    background-color: #b03a2e;
+    transform: scale(1);
+}
+
+.topic-container { 
+    display: none; 
+    margin-top: 5px;
+  }
+  .saved-topic {
+    font-size: 1.1em;
+    color: #333;
+    padding: 5px 10px;
+    background-color: #e8f4fe;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+
+  /* Estilos para el botón de guardar tema */
+  .btn-save-topic {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 5px;
+    font-size: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+  }
+  .btn-save-topic:hover {
+    background-color: #218838;
+  }

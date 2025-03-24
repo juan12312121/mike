@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="con">
+  <div class="container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-calendar-alt"></i>
+        <h1>Vista del jefe de grupo</h1>
+      </div>
+      <div class="user-info">
+        <img src="img/3.jpg" alt="Usuario">
+        <div>
+          <div class="name">Nombre Usuario</div>
+          <div class="role">Rol Usuario</div>
+        </div>
+        <!-- Botón de logout con tooltip -->
+        <a href="#" class="logout-btn" title="Cerrar Sesión">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Semana 1 -->
+    <div class="week-container" [ngClass]="{'active': weekActive}" id="week1">
+      <div class="week-header" (click)="toggleWeek()">
+        <div class="title">
+          <i class="fas fa-calendar-week"></i>
+          Semana 1
+        </div>
+        <div class="dates">Feb 24 - Feb 28, 2025</div>
+        <i class="fas toggle-icon" [ngClass]="{'fa-chevron-down': weekActive, 'fa-chevron-right': !weekActive}"></i>
+      </div>
+      <div class="week-content" [ngClass]="{'hidden': !weekActive}">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th class="time-col">Hora</th>
+              <th>Lunes</th>
+              <th>Martes</th>
+              <th>Miércoles</th>
+              <th>Jueves</th>
+              <th>Viernes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of rows; let rowIndex = index">
+              <td class="time-col">
+                {{ rowIndex === 0 ? '1:00 - 2:00' : '2:00 - 3:00' }}
+              </td>
+              <td *ngFor="let block of row">
+                <div class="class-block">
+                  <div class="class-name">{{ block.subject }}</div>
+                  <div class="class-details">{{ block.group }}</div>
+                  <div class="class-location">
+                    <i class="fas fa-map-marker-alt"></i> {{ block.location }}
+                  </div>
+                  <div class="attendance-buttons">
+                    <button class="btn-attended">Asistió</button>
+                    <button class="btn-not-attended">No Asistió</button>
+                    <button class="btn-topic" (click)="toggleTopicInput(block)">
+                      {{ block.topicButtonText }}
+                    </button>
+                  </div>
+                  <!-- Input para ingresar/editar tema -->
+                  <div class="topic-container" *ngIf="block.topicVisible" style="display: block !important;">
+                    <input
+                      type="text"
+                      class="topic-input"
+                      name="topic_{{ block.id }}"
+                      [(ngModel)]="block.topicInput"
+                      placeholder="Ingrese el tema de la clase">
+                    <button class="btn-save-topic" (click)="saveTopic(block)">Guardar tema</button>
+                  </div>
+                  <!-- Mostrar tema guardado estilizado -->
+                  <div class="saved-topic" *ngIf="!block.topicVisible && block.savedTopic">
+                    {{ block.savedTopic }}
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div class="footer">
+      Sistema de Horarios Académicos v1.0 | © 2025 Universidad Ejemplo
+    </div>
+  </div>
+</div>

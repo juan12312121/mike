@@ -1,0 +1,309 @@
+<div class="body">
+    <app-aside></app-aside>
+  
+    <main>
+      <div class="main-container">
+        <div class="header-bar">
+          <h1 class="page-title">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard Jefe de Carrera
+          </h1>
+         
+        </div>
+        
+        <!-- Tarjetas de resumen -->
+        <div class="dashboard-cards">
+          <div class="dashboard-card card-blue">
+            <div class="card-icon">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="card-content">
+              <h3>12</h3>
+              <p>Jefes de Grupo</p>
+            </div>
+          </div>
+          
+          <div class="dashboard-card card-green">
+            <div class="card-icon">
+              <i class="fas fa-user-check"></i>
+            </div>
+            <div class="card-content">
+              <h3>8</h3>
+              <p>Checadores</p>
+            </div>
+          </div>
+          
+          <div class="dashboard-card card-orange">
+            <div class="card-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="card-content">
+              <h3>45</h3>
+              <p>Profesores</p>
+            </div>
+          </div>
+          
+          <div class="dashboard-card card-red">
+            <div class="card-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="card-content">
+              <h3>5</h3>
+              <p>Faltas No Justificadas</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contenido principal con tabs -->
+        <div class="content-section">
+          <div class="tab-container">
+            <div class="tabs">
+              <div class="tab" 
+                   data-tab="jefes-grupo" 
+                   [ngClass]="{'active': activeTab === 'jefes-grupo'}" 
+                   (click)="selectTab('jefes-grupo')">
+                Jefes de Grupo
+              </div>
+              <div class="tab" 
+                   data-tab="checadores" 
+                   [ngClass]="{'active': activeTab === 'checadores'}" 
+                   (click)="selectTab('checadores')">
+                Checadores
+              </div>
+            </div>
+            
+            <!-- Tab 1: Jefes de Grupo -->
+            <div id="jefes-grupo" class="tab-content" [ngClass]="{'active': activeTab === 'jefes-grupo'}">
+              <div class="section-header">
+                <h2 class="section-title">
+                  <i class="fas fa-user-tie"></i>
+                  Administración de Jefes de Grupo
+                </h2>
+                <div class="section-actions">
+                  <button class="btn btn-primary" (click)="modal.openModal('jefe')">
+                    <i class="fas fa-plus"></i>
+                    Agregar Jefe de Grupo
+                  </button>
+                </div>
+              </div>
+              
+              <div class="search-box">
+                <input type="text" class="form-control" placeholder="Buscar por nombre, carrera o grupo...">
+                <button class="btn btn-secondary">
+                  <i class="fas fa-search"></i>
+                  Buscar
+                </button>
+              </div>
+              
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Carrera</th>
+                      <th>Grupo</th>
+                      <th>Correo</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Carlos Ramírez López</td>
+                      <td>Ingeniería en Sistemas</td>
+                      <td>301</td>
+                      <td>carlos.ramirezuniversidad.edu</td>
+                      <td><span class="status-badge status-active">Activo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Laura Mendoza García</td>
+                      <td>Psicología</td>
+                      <td>202</td>
+                      <td>laura.mendozauniversidad.edu</td>
+                      <td><span class="status-badge status-active">Activo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Roberto Sánchez Ortiz</td>
+                      <td>Contabilidad</td>
+                      <td>401</td>
+                      <td>roberto.sanchezuniversidad.edu</td>
+                      <td><span class="status-badge status-inactive">Inactivo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Ana Herrera Vázquez</td>
+                      <td>Derecho</td>
+                      <td>302</td>
+                      <td>ana.herrerauniversidad.edu</td>
+                      <td><span class="status-badge status-pending">Pendiente</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Miguel Torres Cruz</td>
+                      <td>Arquitectura</td>
+                      <td>201</td>
+                      <td>miguel.torresuniversidad.edu</td>
+                      <td><span class="status-badge status-active">Activo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div class="pagination">
+                <button class="page-link">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="page-link">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="page-link active">1</button>
+                <button class="page-link">2</button>
+                <button class="page-link">3</button>
+                <button class="page-link">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Tab 2: Checadores -->
+            <div id="checadores" class="tab-content" [ngClass]="{'active': activeTab === 'checadores'}">
+              <div class="section-header">
+                <h2 class="section-title">
+                  <i class="fas fa-user-check"></i>
+                  Administración de Checadores
+                </h2>
+                <div class="section-actions">
+                  <button class="btn btn-primary" (click)="modal.openModal('checador')">
+                    <i class="fas fa-plus"></i>
+                    Agregar Checador
+                  </button>
+                </div>
+              </div>
+              
+              <div class="search-box">
+                <input type="text" class="form-control" placeholder="Buscar por nombre, área o responsabilidad...">
+                <button class="btn btn-secondary">
+                  <i class="fas fa-search"></i>
+                  Buscar
+                </button>
+              </div>
+              
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Área</th>
+                      <th>Responsabilidad</th>
+                      <th>Correo</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Lucía Martínez Soto</td>
+                      <td>Edificio A</td>
+                      <td>Aulas 101-110</td>
+                      <td>lucia.martinezuniversidad.edu</td>
+                      <td><span class="status-badge status-active">Activo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>David Gómez Rivero</td>
+                      <td>Edificio B</td>
+                      <td>Laboratorios</td>
+                      <td>david.gomezuniversidad.edu</td>
+                      <td><span class="status-badge status-active">Activo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Sofía Ramos Luna</td>
+                      <td>Edificio C</td>
+                      <td>Aulas 201-210</td>
+                      <td>sofia.ramosuniversidad.edu</td>
+                      <td><span class="status-badge status-inactive">Inactivo</span></td>
+                      <td class="actions-cell">
+                        <button class="action-btn edit-btn" title="Editar">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Eliminar">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div class="pagination">
+                <button class="page-link">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="page-link active">1</button>
+                <button class="page-link">2</button>
+                <button class="page-link">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  
+    <app-modal></app-modal>
+  </div>
+  
