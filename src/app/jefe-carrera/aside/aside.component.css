@@ -1,3 +1,5 @@
+/*ASIDE*/
+
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +11,7 @@ body {
     background: #f5f7fa;
     min-height: 100vh;
     display: flex;
+    margin: 0;
 }
 
 .sidebar {
@@ -26,18 +29,12 @@ body {
     overflow: hidden;
 }
 
-
 .sidebar-header {
     padding: 24px;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, #1a56db, #1e429f);
     color: white;
-}
-
-.logo-wrapper {
-    display: flex;
-    align-items: center;
 }
 
 .logo-circle {
@@ -92,16 +89,8 @@ body {
     align-items: center;
 }
 
-.user-info p i {
-    font-size: 8px;
-    margin-right: 6px;
-    color: #10b981;
-}
-
-.sidebar-menu {
+.sidebar-menu, .sidebar-academic {
     padding: 16px 0;
-    flex-grow: 1;
-    overflow-y: auto;
 }
 
 .menu-category {
@@ -113,7 +102,7 @@ body {
     font-weight: 600;
 }
 
-.menu-item {
+.menu-item, .academic-item {
     padding: 12px 24px;
     display: flex;
     align-items: center;
@@ -123,6 +112,11 @@ body {
     margin: 2px 12px;
     border-radius: 8px;
     position: relative;
+    cursor: pointer;
+}
+
+.menu-item:hover, .academic-item:hover {
+    background-color: #f1f5f9;
 }
 
 .menu-item.active {
@@ -131,30 +125,43 @@ body {
     font-weight: 500;
 }
 
-.menu-item:hover {
-    background-color: #f1f5f9;
-}
-
-.menu-item i {
+.menu-item i, .academic-item i {
     margin-right: 12px;
     font-size: 16px;
     width: 20px;
     text-align: center;
 }
 
-.menu-item.active i {
-    color: #4f46e5;
+.dropdown-icon {
+    margin-left: auto;
+    transition: transform 0.3s ease;
 }
 
-.badge {
-    position: absolute;
-    right: 12px;
-    background: #ef4444;
-    color: white;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-weight: 500;
+.academic-item.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    display: none;
+    background-color: #f8fafc;
+    padding: 8px 0;
+}
+
+.submenu-item {
+    padding: 8px 24px 8px 48px;
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+}
+
+.submenu-item:hover {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.academic-item.active + .submenu {
+    display: block;
 }
 
 .sidebar-footer {
@@ -163,6 +170,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: #f8fafc;
+    margin-top: auto;
 }
 
 .sidebar-footer a {

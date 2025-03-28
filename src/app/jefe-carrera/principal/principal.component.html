@@ -88,8 +88,8 @@
               </div>
               
               <div class="search-box">
-                <input type="text" class="form-control" placeholder="Buscar por nombre, carrera o grupo...">
-                <button class="btn btn-secondary">
+                <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Buscar por nombre, carrera o grupo...">
+                <button class="btn btn-secondary" (click)="filterJefesGrupo()">
                   <i class="fas fa-search"></i>
                   Buscar
                 </button>
@@ -103,77 +103,16 @@
                       <th>Carrera</th>
                       <th>Grupo</th>
                       <th>Correo</th>
-                      <th>Estado</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Carlos Ramírez López</td>
-                      <td>Ingeniería en Sistemas</td>
-                      <td>301</td>
-                      <td>carlos.ramirezuniversidad.edu</td>
-                      <td><span class="status-badge status-active">Activo</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Laura Mendoza García</td>
-                      <td>Psicología</td>
-                      <td>202</td>
-                      <td>laura.mendozauniversidad.edu</td>
-                      <td><span class="status-badge status-active">Activo</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Roberto Sánchez Ortiz</td>
-                      <td>Contabilidad</td>
-                      <td>401</td>
-                      <td>roberto.sanchezuniversidad.edu</td>
-                      <td><span class="status-badge status-inactive">Inactivo</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Ana Herrera Vázquez</td>
-                      <td>Derecho</td>
-                      <td>302</td>
-                      <td>ana.herrerauniversidad.edu</td>
-                      <td><span class="status-badge status-pending">Pendiente</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Miguel Torres Cruz</td>
-                      <td>Arquitectura</td>
-                      <td>201</td>
-                      <td>miguel.torresuniversidad.edu</td>
-                      <td><span class="status-badge status-active">Activo</span></td>
+                    <!-- Filas dinámicas basadas en los jefes de grupo -->
+                    <tr *ngFor="let jefe of filterJefesGrupo()">
+                      <td>{{ jefe.name }}</td>
+                      <td>{{ jefe.carrera }}</td>
+                      <td>{{ jefe.grupo }}</td>
+                      <td>{{ jefe.email }}</td>
                       <td class="actions-cell">
                         <button class="action-btn edit-btn" title="Editar">
                           <i class="fas fa-edit"></i>
@@ -202,6 +141,8 @@
                 </button>
               </div>
             </div>
+            
+            
             
             <!-- Tab 2: Checadores -->
             <div id="checadores" class="tab-content" [ngClass]="{'active': activeTab === 'checadores'}">
@@ -304,6 +245,7 @@
       </div>
     </main>
   
-    <app-modal></app-modal>
+    <app-modal (newJefeAdded)="onNewJefeAdded($event)"></app-modal>
+
   </div>
   

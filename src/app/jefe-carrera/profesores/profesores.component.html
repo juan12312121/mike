@@ -1,0 +1,134 @@
+ <div class="container">
+    <div style="flex: 1;">
+        <app-aside></app-aside>
+    </div>
+    
+  
+    <div class="table-header">
+      <h2>
+        <i class="fas fa-chalkboard-teacher"></i>
+        Profesores Registrados
+      </h2>
+      <button class="add-btn" (click)="openModal('add')">
+        <i class="fas fa-plus"></i>
+        Añadir Profesor
+      </button>
+    </div>
+  
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Carrera</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let professor of professors; let i = index">
+          <td>{{ professor.id }}</td>
+          <td>
+            <div class="professor-name">
+              <div class="professor-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              {{ professor.name }}
+            </div>
+          </td>
+          <td>{{ professor.career }}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn edit-btn" (click)="openModal('edit', professor)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="action-btn delete-btn" (click)="deleteRow(i)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+        <button 
+          (click)="changePage(currentPage - 1)" 
+          [disabled]="currentPage === 1"
+        >
+          Anterior
+        </button>
+    
+        <button 
+          *ngFor="let page of getPagesArray()" 
+          (click)="changePage(page)"
+          [class.active]="page === currentPage"
+        >
+          {{ page }}
+        </button>
+    
+        <button 
+          (click)="changePage(currentPage + 1)" 
+          [disabled]="currentPage === totalPages"
+        >
+          Siguiente
+        </button>
+      </div>
+  
+    <!-- Modal -->
+    <div #professorModal class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>
+            <i class="fas fa-user-{{ modalMode === 'add' ? 'plus' : 'edit' }}"></i>
+            {{ modalMode === 'add' ? 'Añadir' : 'Editar' }} Profesor
+          </h2>
+          <button class="close-btn" (click)="closeModal()">&times;</button>
+        </div>
+        
+        <form #professorForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="professorName">
+              <i class="fas fa-id-badge"></i>
+              Nombre Completo
+            </label>
+            <input 
+              type="text" 
+              id="professorName" 
+              name="name" 
+              [(ngModel)]="currentProfessor.name" 
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="professorCareer">
+              <i class="fas fa-graduation-cap"></i>
+              Carrera
+            </label>
+            <select 
+              id="professorCareer" 
+              name="career" 
+              [(ngModel)]="currentProfessor.career" 
+              required
+            >
+              <option value="">Seleccionar Carrera</option>
+              <option *ngFor="let career of careers" [value]="career">
+                {{ career }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="cancel-btn" (click)="closeModal()">
+              <i class="fas fa-times"></i>
+              Cancelar
+            </button>
+            <button type="submit" class="save-btn" [disabled]="!professorForm.form.valid">
+              <i class="fas fa-save"></i>
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

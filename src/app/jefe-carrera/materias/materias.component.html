@@ -1,0 +1,224 @@
+<div class="body">
+  <app-aside></app-aside>
+
+  <div class="container">
+    <div class="table-header">
+      <h2>
+        <i class="fas fa-book"></i>
+        Materias Registradas
+      </h2>
+      <button class="add-btn" (click)="openAddModal()">
+        <i class="fas fa-plus"></i>
+        Añadir Materia
+      </button>
+    </div>
+
+    <div *ngIf="notification" 
+         class="toast {{ notification.type }}"
+         [ngClass]="{'show': notification}">
+      <div class="toast-icon">
+        <i [ngClass]="getIconClass()"></i>
+      </div>
+      <div class="toast-message">
+        {{ notification.message }}
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de Materia</th>
+          <th>Folio</th>
+          <th>ID Carrera</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of subjects">
+          <td>{{ subject.id }}</td>
+          <td>
+            <div class="subject-name">
+              <div class="subject-icon">
+                <i class="fas fa-book-open"></i>
+              </div>
+              {{ subject.nombre }}
+            </div>
+          </td>
+          <td>{{ subject.codigo }}</td>
+          <td>{{ subject.carrera_id }}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn edit-btn" (click)="openUpdateModal(subject)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="action-btn delete-btn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button disabled>Anterior</button>
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Modal para Agregar Materia -->
+  <div id="subjectAddModal" class="modal-overlay" [class.active]="isAddModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>
+          <i class="fas fa-university"></i>
+          Añadir Materia
+        </h2>
+        <button class="modal-close" (click)="closeAddModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form (ngSubmit)="addSubject()">
+        <div class="form-group">
+          <label for="subjectName">
+            <i class="fas fa-book"></i>
+            Nombre de Materia
+          </label>
+          <input 
+            type="text" 
+            id="subjectName" 
+            name="subjectName"
+            [(ngModel)]="currentSubject.nombre"
+            placeholder="Nombre de Materia" 
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="subjectCode">
+            <i class="fas fa-barcode"></i>
+            Folio de la Materia
+          </label>
+          <input 
+            type="text" 
+            id="subjectCode" 
+            name="subjectCode"
+            [(ngModel)]="currentSubject.codigo"
+            placeholder="Código de Materia" 
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="careerID">
+            <i class="fas fa-graduation-cap"></i>
+            ID Carrera
+          </label>
+          <input 
+            type="number" 
+            id="careerID" 
+            name="careerID"
+            [(ngModel)]="currentSubject.carrera_id"
+            placeholder="ID Carrera" 
+            required
+          >
+        </div>
+        <div class="modal-footer">
+          <button 
+            type="button" 
+            class="modal-cancel" 
+            (click)="closeAddModal()"
+          >
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="modal-save"
+          >
+            <i class="fas fa-save"></i>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para Actualizar Materia -->
+  <div id="subjectUpdateModal" class="modal-overlay" [class.active]="isUpdateModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>
+          <i class="fas fa-university"></i>
+          Actualizar Materia
+        </h2>
+        <button class="modal-close" (click)="closeUpdateModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form (ngSubmit)="updateSubject()">
+        <div class="form-group">
+          <label for="subjectNameUpdate">
+            <i class="fas fa-book"></i>
+            Nombre de Materia
+          </label>
+          <input 
+            type="text" 
+            id="subjectNameUpdate" 
+            name="subjectNameUpdate"
+            [(ngModel)]="currentSubject.nombre"
+            placeholder="Nombre de Materia" 
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="subjectCodeUpdate">
+            <i class="fas fa-barcode"></i>
+            Folio de la Materia
+          </label>
+          <input 
+            type="text" 
+            id="subjectCodeUpdate" 
+            name="subjectCodeUpdate"
+            [(ngModel)]="currentSubject.codigo"
+            placeholder="Código de Materia" 
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="careerIDUpdate">
+            <i class="fas fa-graduation-cap"></i>
+            ID Carrera
+          </label>
+          <input 
+            type="number" 
+            id="careerIDUpdate" 
+            name="careerIDUpdate"
+            [(ngModel)]="currentSubject.carrera_id"
+            placeholder="ID Carrera" 
+            required
+          >
+        </div>
+        <div class="modal-footer">
+          <button 
+            type="button" 
+            class="modal-cancel" 
+            (click)="closeUpdateModal()"
+          >
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="modal-save"
+          >
+            <i class="fas fa-save"></i>
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
