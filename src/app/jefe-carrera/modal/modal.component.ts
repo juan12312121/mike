@@ -11,48 +11,50 @@ import { AutenticacionService } from '../../core/service/autenticacion.service';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  // Variables para controlar la visibilidad de cada modal
+  open(checador: any) {
+    throw new Error('Method not implemented.');
+  }
   showModalJefe = false;
   showModalChecador = false;
-  
-  // Variables para animación de cierre
   closingJefe = false;
   closingChecador = false;
 
-  // Variables para el formulario de registro de jefe de grupo
   jefeName: string = '';
   jefeEmail: string = '';
   jefePassword: string = '';
   jefeCarrera: string = '';
   jefeGrupo: string = '';
 
-  @Output() newJefeAdded = new EventEmitter<any>(); // Emisor para enviar el nuevo jefe de grupo al componente principal
+  checador = {
+    name: '',
+    email: '',
+    password: ''
+  };
+
+  successMessage: string = '';
+  errorMessage: string = '';
+
+  @Output() newJefeAdded = new EventEmitter<any>();
+  @Output() newChecadorAdded = new EventEmitter<any>();
 
   constructor(
     private cdr: ChangeDetectorRef,
     private authService: AutenticacionService
   ) {}
 
-  // Método para abrir el modal según el tipo
   openModal(modalType: 'jefe' | 'checador'): void {
-    console.log('openModal llamado con:', modalType);
     if (modalType === 'jefe') {
       this.showModalJefe = true;
     } else {
       this.showModalChecador = true;
     }
     this.cdr.detectChanges();
-    console.log('showModalJefe:', this.showModalJefe, 'showModalChecador:', this.showModalChecador);
   }
 
-  // Método para cerrar todos los modales con animación
   closeModal(): void {
-    console.log('closeModal llamado');
-    
     if (this.showModalJefe) this.closingJefe = true;
     if (this.showModalChecador) this.closingChecador = true;
     
-    // Esperar a que termine la animación antes de ocultar
     setTimeout(() => {
       this.showModalJefe = false;
       this.showModalChecador = false;
@@ -60,20 +62,15 @@ export class ModalComponent {
       this.closingChecador = false;
       this.cdr.detectChanges();
     }, 300);
-    
-    console.log('Cerrando modales con animación');
   }
 
-  // Método para registrar al jefe de grupo
   registerJefeGrupo(): void {
-    // Validar que todos los campos estén completos
     if (!this.jefeName.trim() || !this.jefeEmail.trim() || !this.jefePassword.trim() || !this.jefeCarrera.trim() || !this.jefeGrupo.trim()) {
-      console.warn('Todos los campos son obligatorios para registrar un jefe de grupo.');
-      alert('Por favor, complete todos los campos.'); // Alerta simple
+      this.errorMessage = 'Por favor, complete todos los campos para registrar un profesor.';
+      setTimeout(() => this.errorMessage = '', 3000);
       return;
     }
-  
-    // Llamada al servicio para registrar el usuario con rol "jefe de grupo"
+    
     this.authService.register(
       this.jefeName.trim(),
       this.jefeEmail.trim(),
@@ -83,39 +80,78 @@ export class ModalComponent {
       this.jefeGrupo.trim()
     ).subscribe({
       next: (res) => {
-        console.log('Registro exitoso:', res);
-        this.resetJefeGrupoForm();
-        this.closeModal();
-        
-        // Aquí se agrega el nuevo jefe de grupo a la lista en el componente principal
         const nuevoJefe = {
           name: this.jefeName,
           email: this.jefeEmail,
           carrera: this.jefeCarrera,
           grupo: this.jefeGrupo,
-          // Añadir otros datos que el API haya retornado si es necesario
         };
-        
-        // Pasar el nuevo jefe de grupo al componente principal
         this.newJefeAdded.emit(nuevoJefe);
-        
-        // Mostrar una alerta de éxito
-        alert('Jefe de grupo registrado exitosamente!');
+        this.successMessage = 'Profesor registrado exitosamente!';
+        setTimeout(() => this.successMessage = '', 3000);
+        this.resetJefeGrupoForm();
+        this.closeModal();
       },
       error: (err) => {
-        console.error('Error al registrar al jefe de grupo:', err);
-        alert('Hubo un error al registrar al jefe de grupo. Intente de nuevo más tarde.'); // Alerta de error
+        this.errorMessage = 'Hubo un error al registrar al profesor. Intente de nuevo más tarde.';
+        setTimeout(() => this.errorMessage = '', 3000);
+      }
+    });
+  }
+
+  registerChecador(): void {
+    if (!this.checador.name.trim() || !this.checador.email.trim() || !this.checador.password.trim()) {
+      this.errorMessage = 'Por favor, complete todos los campos para registrar un checador.';
+      setTimeout(() => this.errorMessage = '', 3000);
+      return;
+    }
+    
+    console.log('Registrando checador con datos:', this.checador);
+    
+    this.authService.register(
+      this.checador.name.trim(),
+      this.checador.email.trim(),
+      this.checador.password,
+      'checador'
+    ).subscribe({
+      next: (res) => {
+        console.log('Respuesta del registro de checador:', res);
+        const nuevoChecador = {
+          name: this.checador.name,
+          email: this.checador.email,
+        };
+        this.newChecadorAdded.emit(nuevoChecador);
+        this.successMessage = 'Checador registrado exitosamente!';
+        setTimeout(() => this.successMessage = '', 3000);
+        this.resetChecadorForm();
+        this.closeModal();
+      },
+      error: (err) => {
+        console.error('Error al registrar checador:', err);
+        if (err.status) {
+          console.error(`Código de estado HTTP: ${err.status}`);
+        }
+        if (err.message) {
+          console.error(`Mensaje de error: ${err.message}`);
+        }
+        this.errorMessage = 'Hubo un error al registrar al checador. Intente de nuevo más tarde.';
+        setTimeout(() => this.errorMessage = '', 3000);
       }
     });
   }
   
-
-  // Método para limpiar los campos del formulario de jefe de grupo
+  
   private resetJefeGrupoForm(): void {
     this.jefeName = '';
     this.jefeEmail = '';
     this.jefePassword = '';
     this.jefeCarrera = '';
     this.jefeGrupo = '';
+  }
+
+  private resetChecadorForm(): void {
+    this.checador.name = '';
+    this.checador.email = '';
+    this.checador.password = '';
   }
 }

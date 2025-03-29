@@ -5,6 +5,15 @@
       <h3 class="modal-title"><i class="fas fa-user-tie"></i> Agregar Jefe de Grupo</h3>
       <button class="modal-close" (click)="closeModal()"><i class="fas fa-times"></i></button>
     </div>
+
+    <!-- Contenedores para mensajes estilizados -->
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+      <i class="fas fa-check-circle"></i> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
+    </div>
+    
     <div class="modal-body">
       <!-- Campo para Nombre Completo -->
       <div class="form-group">
@@ -12,24 +21,28 @@
         <input type="text" id="jefe-nombre" class="form-control" placeholder="Nombre y Apellidos" [(ngModel)]="jefeName">
         <i class="fas fa-user"></i>
       </div>
+
       <!-- Campo para Correo Electrónico -->
       <div class="form-group">
         <label for="jefe-email">Correo Electrónico</label>
         <input type="email" id="jefe-email" class="form-control" [(ngModel)]="jefeEmail">
         <i class="fas fa-envelope"></i>
       </div>
+
       <!-- Campo para Contraseña -->
       <div class="form-group">
         <label for="jefe-password">Contraseña</label>
         <input type="password" id="jefe-password" class="form-control" [(ngModel)]="jefePassword">
         <i class="fas fa-lock"></i>
       </div>
+
       <!-- Campo para Carrera -->
       <div class="form-group">
         <label for="jefe-carrera">Carrera</label>
         <input type="text" id="jefe-carrera" class="form-control" [(ngModel)]="jefeCarrera">
         <i class="fas fa-graduation-cap"></i>
       </div>
+
       <!-- Campo para Grupo -->
       <div class="form-group">
         <label for="jefe-grupo">Grupo</label>
@@ -37,6 +50,7 @@
         <i class="fas fa-users"></i>
       </div>
     </div>
+    
     <div class="modal-footer">
       <button class="btn btn-secondary" (click)="closeModal()">
         <i class="fas fa-times-circle"></i> Cancelar
@@ -48,59 +62,52 @@
   </div>
 </div>
 
-  <!-- Modal para agregar/editar checador -->
-  <div *ngIf="showModalChecador" class="modal" [ngClass]="{'active': showModalChecador, 'closing': closingChecador}">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title"><i class="fas fa-clipboard-check"></i> Agregar Checador</h3>
-        <button class="modal-close" (click)="closeModal()"><i class="fas fa-times"></i></button>
+<!-- Modal para agregar/editar checador -->
+<div *ngIf="showModalChecador" class="modal" [ngClass]="{'active': showModalChecador, 'closing': closingChecador}">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title"><i class="fas fa-clipboard-check"></i> Agregar Checador</h3>
+      <button class="modal-close" (click)="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Campo Nombre -->
+      <div class="form-group">
+        <label for="checador-nombre">Nombre</label>
+        <input type="text" id="checador-nombre" class="form-control" [(ngModel)]="checador.name">
+        <i class="fas fa-user"></i>
       </div>
-      <div class="modal-body">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="checador-nombre">Nombre</label>
-            <input type="text" id="checador-nombre" class="form-control">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="form-group">
-            <label for="checador-apellidos">Apellidos</label>
-            <input type="text" id="checador-apellidos" class="form-control">
-            <i class="fas fa-user-tag"></i>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="checador-area">Área</label>
-            <input type="text" id="checador-area" class="form-control">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="form-group">
-            <label for="checador-responsabilidad">Responsabilidad</label>
-            <input type="text" id="checador-responsabilidad" class="form-control">
-            <i class="fas fa-tasks"></i>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="checador-email">Correo Electrónico</label>
-          <input type="email" id="checador-email" class="form-control">
-          <i class="fas fa-envelope"></i>
-        </div>
-        <div class="form-group">
-          <label for="checador-estado">Estado</label>
-          <select id="checador-estado" class="form-control">
-            <option value="activo">Activo</option>
-            <option value="inactivo">Inactivo</option>
-          </select>
-          <i class="fas fa-toggle-on"></i>
-        </div>
+
+      <!-- Campo Correo Electrónico -->
+      <div class="form-group">
+        <label for="checador-email">Correo Electrónico</label>
+        <input type="email" id="checador-email" class="form-control" [(ngModel)]="checador.email">
+        <i class="fas fa-envelope"></i>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" (click)="closeModal()">
-          <i class="fas fa-times-circle"></i> Cancelar
-        </button>
-        <button class="btn btn-primary">
-          <i class="fas fa-save"></i> Guardar
-        </button>
+
+      <!-- Campo Contraseña -->
+      <div class="form-group">
+        <label for="checador-password">Contraseña</label>
+        <input type="password" id="checador-password" class="form-control" [(ngModel)]="checador.password">
+        <i class="fas fa-lock"></i>
+      </div>
+
+      <!-- Mensajes de error y éxito -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success">
+        <i class="fas fa-check-circle"></i> {{ successMessage }}
       </div>
     </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeModal()">
+        <i class="fas fa-times-circle"></i> Cancelar
+      </button>
+      <button class="btn btn-primary" (click)="registerChecador()">
+        <i class="fas fa-save"></i> Guardar
+      </button>
+    </div>
   </div>
+</div>

@@ -7,10 +7,14 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AutenticacionService {
+  deleteChecador(checadorId: number) {
+    throw new Error('Method not implemented.');
+  }
 
   private loginUrl = 'http://localhost:3000/api/auth/login';    // URL del backend para login
   private registerUrl = 'http://localhost:3000/api/auth/register'; // URL del backend para registro
   private jefesGrupoUrl = 'http://localhost:3000/api/auth/jefes-grupo'; // URL del backend para obtener todos los jefes de grupo
+  private checadoresUrl = 'http://localhost:3000/api/auth/checadores';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -112,5 +116,10 @@ export class AutenticacionService {
   // Función para obtener todos los usuarios con el rol 'jefe de grupo'
   getJefesGrupo(): Observable<any> {
     return this.http.get<any>(this.jefesGrupoUrl, { headers: this.getHeaders() });
+  }
+
+  // Función para obtener los checadores (requiere token de autorización)
+  getChecadores(): Observable<any> {
+    return this.http.get<any>(this.checadoresUrl, { headers: this.getHeaders() });
   }
 }

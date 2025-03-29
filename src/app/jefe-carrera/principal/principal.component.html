@@ -1,251 +1,237 @@
 <div class="body">
-    <app-aside></app-aside>
-  
-    <main>
-      <div class="main-container">
-        <div class="header-bar">
-          <h1 class="page-title">
-            <i class="fas fa-tachometer-alt"></i>
-            Dashboard Jefe de Carrera
-          </h1>
-         
-        </div>
-        
-        <!-- Tarjetas de resumen -->
-        <div class="dashboard-cards">
-          <div class="dashboard-card card-blue">
-            <div class="card-icon">
-              <i class="fas fa-user-tie"></i>
-            </div>
-            <div class="card-content">
-              <h3>12</h3>
-              <p>Jefes de Grupo</p>
-            </div>
+  <app-aside></app-aside>
+
+  <main>
+    <div class="main-container">
+      <div class="header-bar">
+        <h1 class="page-title">
+          <i class="fas fa-tachometer-alt"></i>
+          Dashboard Jefe de Carrera
+        </h1>
+      </div>
+      
+      <!-- Tarjetas de resumen -->
+      <div class="dashboard-cards">
+        <div class="dashboard-card card-blue">
+          <div class="card-icon">
+            <i class="fas fa-user-tie"></i>
           </div>
-          
-          <div class="dashboard-card card-green">
-            <div class="card-icon">
-              <i class="fas fa-user-check"></i>
-            </div>
-            <div class="card-content">
-              <h3>8</h3>
-              <p>Checadores</p>
-            </div>
-          </div>
-          
-          <div class="dashboard-card card-orange">
-            <div class="card-icon">
-              <i class="fas fa-chalkboard-teacher"></i>
-            </div>
-            <div class="card-content">
-              <h3>45</h3>
-              <p>Profesores</p>
-            </div>
-          </div>
-          
-          <div class="dashboard-card card-red">
-            <div class="card-icon">
-              <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="card-content">
-              <h3>5</h3>
-              <p>Faltas No Justificadas</p>
-            </div>
+          <div class="card-content">
+            <h3>12</h3>
+            <p>Jefes de Grupo</p>
           </div>
         </div>
         
-        <!-- Contenido principal con tabs -->
-        <div class="content-section">
-          <div class="tab-container">
-            <div class="tabs">
-              <div class="tab" 
-                   data-tab="jefes-grupo" 
-                   [ngClass]="{'active': activeTab === 'jefes-grupo'}" 
-                   (click)="selectTab('jefes-grupo')">
-                Jefes de Grupo
-              </div>
-              <div class="tab" 
-                   data-tab="checadores" 
-                   [ngClass]="{'active': activeTab === 'checadores'}" 
-                   (click)="selectTab('checadores')">
-                Checadores
-              </div>
-            </div>
-            
-            <!-- Tab 1: Jefes de Grupo -->
-            <div id="jefes-grupo" class="tab-content" [ngClass]="{'active': activeTab === 'jefes-grupo'}">
-              <div class="section-header">
-                <h2 class="section-title">
-                  <i class="fas fa-user-tie"></i>
-                  Administración de Jefes de Grupo
-                </h2>
-                <div class="section-actions">
-                  <button class="btn btn-primary" (click)="modal.openModal('jefe')">
-                    <i class="fas fa-plus"></i>
-                    Agregar Jefe de Grupo
-                  </button>
-                </div>
-              </div>
-              
-              <div class="search-box">
-                <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Buscar por nombre, carrera o grupo...">
-                <button class="btn btn-secondary" (click)="filterJefesGrupo()">
-                  <i class="fas fa-search"></i>
-                  Buscar
-                </button>
-              </div>
-              
-              <div class="table-container">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Carrera</th>
-                      <th>Grupo</th>
-                      <th>Correo</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- Filas dinámicas basadas en los jefes de grupo -->
-                    <tr *ngFor="let jefe of filterJefesGrupo()">
-                      <td>{{ jefe.name }}</td>
-                      <td>{{ jefe.carrera }}</td>
-                      <td>{{ jefe.grupo }}</td>
-                      <td>{{ jefe.email }}</td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              
-              <div class="pagination">
-                <button class="page-link">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="page-link">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="page-link active">1</button>
-                <button class="page-link">2</button>
-                <button class="page-link">3</button>
-                <button class="page-link">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-            </div>
-            
-            
-            
-            <!-- Tab 2: Checadores -->
-            <div id="checadores" class="tab-content" [ngClass]="{'active': activeTab === 'checadores'}">
-              <div class="section-header">
-                <h2 class="section-title">
-                  <i class="fas fa-user-check"></i>
-                  Administración de Checadores
-                </h2>
-                <div class="section-actions">
-                  <button class="btn btn-primary" (click)="modal.openModal('checador')">
-                    <i class="fas fa-plus"></i>
-                    Agregar Checador
-                  </button>
-                </div>
-              </div>
-              
-              <div class="search-box">
-                <input type="text" class="form-control" placeholder="Buscar por nombre, área o responsabilidad...">
-                <button class="btn btn-secondary">
-                  <i class="fas fa-search"></i>
-                  Buscar
-                </button>
-              </div>
-              
-              <div class="table-container">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Área</th>
-                      <th>Responsabilidad</th>
-                      <th>Correo</th>
-                      <th>Estado</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Lucía Martínez Soto</td>
-                      <td>Edificio A</td>
-                      <td>Aulas 101-110</td>
-                      <td>lucia.martinezuniversidad.edu</td>
-                      <td><span class="status-badge status-active">Activo</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>David Gómez Rivero</td>
-                      <td>Edificio B</td>
-                      <td>Laboratorios</td>
-                      <td>david.gomezuniversidad.edu</td>
-                      <td><span class="status-badge status-active">Activo</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Sofía Ramos Luna</td>
-                      <td>Edificio C</td>
-                      <td>Aulas 201-210</td>
-                      <td>sofia.ramosuniversidad.edu</td>
-                      <td><span class="status-badge status-inactive">Inactivo</span></td>
-                      <td class="actions-cell">
-                        <button class="action-btn edit-btn" title="Editar">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn delete-btn" title="Eliminar">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              
-              <div class="pagination">
-                <button class="page-link">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="page-link active">1</button>
-                <button class="page-link">2</button>
-                <button class="page-link">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-            </div>
+        <div class="dashboard-card card-green">
+          <div class="card-icon">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div class="card-content">
+            <h3>8</h3>
+            <p>Checadores</p>
+          </div>
+        </div>
+        
+        <div class="dashboard-card card-orange">
+          <div class="card-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="card-content">
+            <h3>45</h3>
+            <p>Profesores</p>
+          </div>
+        </div>
+        
+        <div class="dashboard-card card-red">
+          <div class="card-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="card-content">
+            <h3>5</h3>
+            <p>Faltas No Justificadas</p>
           </div>
         </div>
       </div>
-    </main>
-  
-    <app-modal (newJefeAdded)="onNewJefeAdded($event)"></app-modal>
+      
+      <!-- Contenido principal con tabs -->
+      <div class="content-section">
+        <div class="tab-container">
+          <div class="tabs">
+            <div class="tab" 
+                 data-tab="jefes-grupo" 
+                 [ngClass]="{'active': activeTab === 'jefes-grupo'}" 
+                 (click)="selectTab('jefes-grupo')">
+              Jefes de Grupo
+            </div>
+            <div class="tab" 
+                 data-tab="checadores" 
+                 [ngClass]="{'active': activeTab === 'checadores'}" 
+                 (click)="selectTab('checadores')">
+              Checadores
+            </div>
+          </div>
+          
+          <!-- Tab 1: Jefes de Grupo -->
+          <div id="jefes-grupo" class="tab-content" [ngClass]="{'active': activeTab === 'jefes-grupo'}">
+            <div class="section-header">
+              <h2 class="section-title">
+                <i class="fas fa-user-tie"></i>
+                Administración de Jefes de Grupo
+              </h2>
+              <div class="section-actions">
+                <!-- Invoca el método openModal('jefe') del modal mediante template reference -->
+                <button class="btn btn-primary" (click)="modal.openModal('jefe')">
+                  <i class="fas fa-plus"></i>
+                  Agregar Jefe de Grupo
+                </button>
+              </div>
+            </div>
+            
+            <div class="search-box">
+              <input type="text" class="form-control" 
+                     [(ngModel)]="searchTerm" 
+                     (ngModelChange)="onSearchChange()"
+                     placeholder="Buscar por nombre, carrera o grupo...">
+              <button class="btn btn-secondary" (click)="onSearchChange()">
+                <i class="fas fa-search"></i>
+                Buscar
+              </button>
+            </div>
+            
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Carrera</th>
+                    <th>Grupo</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Utiliza el getter filteredJefesGrupo en lugar de filterJefesGrupo() -->
+                  <tr *ngFor="let jefe of filteredJefesGrupo">
+                    <td>{{ jefe.name }}</td>
+                    <td>{{ jefe.carrera }}</td>
+                    <td>{{ jefe.grupo }}</td>
+                    <td>{{ jefe.email }}</td>
+                    <td class="actions-cell">
+                      <button class="action-btn edit-btn" title="Editar">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="action-btn delete-btn" title="Eliminar">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Sección de paginación -->
+            <div class="pagination">
+              <button class="page-link" (click)="prevPage()" [disabled]="currentPage === 1">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button 
+                *ngFor="let page of [].constructor(totalPages); let i = index" 
+                class="page-link" 
+                [ngClass]="{'active': (i + 1) === currentPage}"
+                (click)="goToPage(i + 1)">
+                {{ i + 1 }}
+              </button>
+              <button class="page-link" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Tab 2: Checadores -->
+          <div id="checadores" class="tab-content" [ngClass]="{'active': activeTab === 'checadores'}">
+            <div class="section-header">
+              <h2 class="section-title">
+                <i class="fas fa-user-check"></i>
+                Administración de Checadores
+              </h2>
+              <div class="section-actions">
+                <button class="btn btn-primary" (click)="modal.openModal('checador')">
+                  <i class="fas fa-plus"></i>
+                  Agregar Checador
+                </button>
+              </div>
+            </div>
+          
+            <div class="search-box">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Buscar por nombre, área o responsabilidad..."
+                [(ngModel)]="searchTerm" 
+                (ngModelChange)="onSearchChange()"
+              >
+              <button class="btn btn-secondary" (click)="onSearch()">
+                <i class="fas fa-search"></i>
+                Buscar
+              </button>
+            </div>
+          
+            <div class="table-container" *ngIf="filteredChecadores && filteredChecadores.length > 0; else noResults">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Nombre Completo</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let checador of filteredChecadores">
+                    <td>{{ checador.name }}</td>
+                    <td>{{ checador.email }}</td>
+                    <td class="actions-cell">
+                      <button class="action-btn edit-btn" title="Editar">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="action-btn delete-btn" title="Eliminar">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          
+            <ng-template #noResults>
+              <div class="no-results">
+                No se encontraron checadores.
+              </div>
+            </ng-template>
+          
+            <div class="pagination" *ngIf="pages && pages.length > 1">
+              <button class="page-link" (click)="goToPage(currentPage - 1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button *ngFor="let page of pages" class="page-link" [class.active]="currentPage === page" (click)="goToPage(page)">
+                {{ page }}
+              </button>
+              <button class="page-link" (click)="goToPage(currentPage + 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+  </main>
 
-  </div>
-  
+  <!-- Se agrega el componente Modal con referencia para poder abrirlo desde el padre -->
+  <app-modal 
+  #modal 
+  (newJefeAdded)="onNewJefeAdded($event)" 
+  (newChecadorAdded)="onNewChecadorAdded($event)">
+</app-modal>
+
+</div>
