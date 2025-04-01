@@ -1,5 +1,8 @@
 <div class="body">
   <app-aside></app-aside>
+  
+  <!-- Contenedor para las notificaciones tipo toast -->
+  <div id="toast-container"></div>
 
   <main>
     <div class="main-container">
@@ -79,7 +82,6 @@
                 Administración de Jefes de Grupo
               </h2>
               <div class="section-actions">
-                <!-- Invoca el método openModal('jefe') del modal mediante template reference -->
                 <button class="btn btn-primary" (click)="modal.openModal('jefe')">
                   <i class="fas fa-plus"></i>
                   Agregar Jefe de Grupo
@@ -102,6 +104,7 @@
               <table class="data-table">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Carrera</th>
                     <th>Grupo</th>
@@ -110,17 +113,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Utiliza el getter filteredJefesGrupo en lugar de filterJefesGrupo() -->
                   <tr *ngFor="let jefe of filteredJefesGrupo">
+                    <td>{{ jefe.id }}</td>
                     <td>{{ jefe.name }}</td>
                     <td>{{ jefe.carrera }}</td>
                     <td>{{ jefe.grupo }}</td>
                     <td>{{ jefe.email }}</td>
                     <td class="actions-cell">
-                      <button class="action-btn edit-btn" title="Editar">
+                      <button class="action-btn edit-btn" title="Editar" (click)="openEditModal(jefe, 'jefe')">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button class="action-btn delete-btn" title="Eliminar">
+                      <button class="action-btn delete-btn" title="Eliminar Jefe de Grupo" (click)="deleteUsuario(jefe.id, 'jefe')">
                         <i class="fas fa-trash"></i>
                       </button>
                     </td>
@@ -193,7 +196,7 @@
                       <button class="action-btn edit-btn" title="Editar">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button class="action-btn delete-btn" title="Eliminar">
+                      <button class="action-btn delete-btn" title="Eliminar Checador" (click)="deleteUsuario(checador.id, 'checador')">
                         <i class="fas fa-trash"></i>
                       </button>
                     </td>
@@ -221,17 +224,16 @@
             </div>
           </div>
           
-          
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Se agrega el componente Modal con referencia para poder abrirlo desde el padre -->
+  <!-- Componente Modal para la gestión de Jefes de Grupo y Checadores -->
   <app-modal 
-  #modal 
-  (newJefeAdded)="onNewJefeAdded($event)" 
-  (newChecadorAdded)="onNewChecadorAdded($event)">
-</app-modal>
-
+    #modal
+    (newJefeAdded)="onNewJefeAdded($event)" 
+    (newChecadorAdded)="onNewChecadorAdded($event)"
+    (jefeUpdated)="onJefeUpdated($event)">
+  </app-modal>
 </div>

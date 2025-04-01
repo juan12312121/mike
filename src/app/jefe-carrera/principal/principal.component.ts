@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AutenticacionService } from '../../core/service/autenticacion.service'; // Import del servicio
+import { AutenticacionService } from '../../core/service/autenticacion.service';
 import { AsideComponent } from "../aside/aside.component";
 import { ModalComponent } from "../modal/modal.component";
 
@@ -13,45 +13,36 @@ import { ModalComponent } from "../modal/modal.component";
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
-  // Pestaña activa, por defecto la de "Jefes de Grupo"
   activeTab: string = 'jefes-grupo';
-  
-  // Variables para almacenar los jefes de grupo y checadores
   jefesGrupo: any[] = [];
   checadores: any[] = [];
-  searchTerm: string = '';  // Término para búsqueda
-
-  // Variables para paginación
+  searchTerm: string = '';
   currentPage: number = 1;
-  itemsPerPage: number = 5; // Ajusta la cantidad de elementos por página
+  itemsPerPage: number = 5;
   totalPages: number = 0;
+  pages: number[] = [];
+  filteredChecadores: any[] | undefined;
 
   @ViewChild(ModalComponent) modal!: ModalComponent;
-  filteredChecadores: any[] | undefined;
-pages: any;
 
   constructor(private authService: AutenticacionService) {}
 
-  // Método para cambiar la pestaña activa
-  selectTab(tab: string): void {
-    this.activeTab = tab;
-    localStorage.setItem('activeTab', tab);
-    // Reiniciar la paginación cuando se cambia de pestaña
-    this.currentPage = 1;
-    if (this.activeTab === 'jefes-grupo') {
-      this.getJefesGrupo();
-    } else if (this.activeTab === 'checadores') {
-      this.getChecadores();
-    }
-  }
-
-  // Se llama al iniciar el componente
   ngOnInit(): void {
-    // Recupera el tab activo desde localStorage, si existe
     const storedTab = localStorage.getItem('activeTab');
     if (storedTab) {
       this.activeTab = storedTab;
     }
+    this.loadData();
+  }
+
+  selectTab(tab: string): void {
+    this.activeTab = tab;
+    localStorage.setItem('activeTab', tab);
+    this.currentPage = 1;
+    this.loadData();
+  }
+
+  loadData(): void {
     if (this.activeTab === 'jefes-grupo') {
       this.getJefesGrupo();
     } else if (this.activeTab === 'checadores') {
@@ -59,65 +50,40 @@ pages: any;
     }
   }
 
-  // Función para obtener los jefes de grupo desde el API
   getJefesGrupo(): void {
-    this.authService.getJefesGrupo().subscribe(
-      (response) => {
-        console.log("Respuesta completa del API:", response);
+    this.authService.getJefesGrupo().subscribe({
+      next: (response) => {
+        console.log("Jefes de Grupo obtenidos:", response);
         this.jefesGrupo = response;
         this.calculateTotalPages();
-        console.log("Jefes de grupo obtenidos:", this.jefesGrupo);
       },
-      (error) => {
+      error: (error) => {
         console.error("Error al obtener jefes de grupo:", error);
-        alert('Hubo un problema al obtener los jefes de grupo. Intente nuevamente más tarde.');
+        this.mostrarToast('Hubo un problema al obtener los jefes de grupo.', 'error');
       }
-    );
+    });
   }
 
-  // Función para obtener los checadores desde el API
   getChecadores(): void {
-    console.log("Iniciando petición para obtener checadores...");
-  
-    this.authService.getChecadores().subscribe(
-      (response) => {
-        console.log("Respuesta completa del API (checadores):", response);
-        this.checadores = response;
-  
-        // Verificar si los datos recibidos son correctos
+    this.authService.getChecadores().subscribe({
+      next: (response) => {
+        console.log("Checadores obtenidos:", response);
         if (!Array.isArray(response)) {
           console.error("La respuesta del API no es un array:", response);
-          alert("Error en la estructura de datos recibida.");
+          this.mostrarToast("Error en la estructura de datos recibida.", 'error');
           return;
         }
-  
-        // Asigna los checadores obtenidos a filteredChecadores si no hay término de búsqueda
-        if (!this.searchTerm) {
-          this.filteredChecadores = [...this.checadores];
-        }
-        
+        this.checadores = response;
+        this.filteredChecadores = [...this.checadores];
         this.calculateTotalPages();
-        console.log("Checadores obtenidos correctamente:", this.checadores);
       },
-      (error) => {
+      error: (error) => {
         console.error("Error en la petición de checadores:", error);
-  
-        if (error.status) {
-          console.error(`Código de estado HTTP: ${error.status}`);
-        }
-  
-        if (error.message) {
-          console.error(`Mensaje de error: ${error.message}`);
-        }
-  
-        alert("Hubo un problema al obtener los checadores. Revisa la consola para más detalles.");
+        this.mostrarToast("Hubo un problema al obtener los checadores.", 'error');
       }
-    );
+    });
   }
-  
-  
 
-  // Método para recalcular el total de páginas en base a la lista filtrada
   calculateTotalPages(): void {
     const filtered = this.searchTerm 
       ? this.jefesGrupo.filter(jefe =>
@@ -127,11 +93,10 @@ pages: any;
         )
       : this.jefesGrupo;
     this.totalPages = Math.ceil(filtered.length / this.itemsPerPage);
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
-  // Getter para obtener la lista filtrada y paginada
   get filteredJefesGrupo(): any[] {
-    // Filtrar según el término de búsqueda
     let filtered = this.searchTerm 
       ? this.jefesGrupo.filter(jefe =>
           jefe.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -140,24 +105,20 @@ pages: any;
         )
       : this.jefesGrupo;
 
-    // Recalcular total de páginas y reiniciar currentPage si es necesario
     this.totalPages = Math.ceil(filtered.length / this.itemsPerPage);
     if (this.currentPage > this.totalPages) {
       this.currentPage = this.totalPages || 1;
     }
-
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return filtered.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
-  // Método para cambiar de página
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
   }
 
-  // Métodos para avanzar o retroceder página
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -170,40 +131,22 @@ pages: any;
     }
   }
 
-  // Método para recibir el evento de nuevo jefe agregado desde el ModalComponent
   onNewJefeAdded(newJefe: any): void {
-    this.jefesGrupo.push(newJefe); // Se añade el nuevo registro a la lista
+    this.jefesGrupo.push(newJefe);
     this.calculateTotalPages();
   }
 
   onNewChecadorAdded(newChecador: any): void {
-    // Agrega el nuevo checador al arreglo de checadores
     this.checadores.push(newChecador);
-  
-    // Si no se está usando búsqueda, actualiza también filteredChecadores
-    // O, si usas lógica de búsqueda, vuelve a aplicar el filtro.
-    if (!this.searchTerm) {
-      this.filteredChecadores = [...this.checadores];
-    } else {
-      this.onSearch(); // Vuelve a filtrar con el término actual
-    }
-  
-    // Recalcula la paginación si es necesario
+    this.filteredChecadores = [...this.checadores];
     this.calculateTotalPages();
-    console.log('Nuevo checador agregado:', newChecador);
   }
-  
 
-  // Método para cuando se cambia el término de búsqueda
   onSearchChange(): void {
-    // Reinicia la página actual y recalcula total de páginas
     this.currentPage = 1;
-    this.calculateTotalPages();
-    // Actualiza la lista filtrada en tiempo real
-    this.onSearch();
+    // Actualizar el filtrado si se requiere
   }
-  
-  // Método para la búsqueda de checadores
+
   onSearch(): void {
     if (this.searchTerm) {
       this.filteredChecadores = this.checadores.filter(checador => 
@@ -211,14 +154,92 @@ pages: any;
         checador.email.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
-      // Si no hay término de búsqueda, muestra todos los checadores
       this.filteredChecadores = [...this.checadores];
     }
   }
-  
 
-  // Método para editar un checador
+  deleteUsuario(userId: number, tipo: 'jefe' | 'checador'): void {
+    const tipoUsuario = tipo === 'jefe' ? 'Jefe de Grupo' : 'Checador';
+    const mensaje = `Esta acción eliminará permanentemente al ${tipoUsuario}. ¿Continuar?`;
 
-  // Método para eliminar un checador
-  
+    if (!confirm(mensaje)) return;
+
+    this.authService.deleteUser(userId).subscribe({
+      next: () => {
+        console.log(`${tipoUsuario} eliminado correctamente`);
+        this.actualizarListaUsuarios(userId, tipo);
+        this.mostrarToast(`${tipoUsuario} eliminado exitosamente.`, 'success');
+      },
+      error: (error) => {
+        console.error(`Error al eliminar el ${tipoUsuario}:`, error);
+        this.mostrarToast(`Hubo un problema al eliminar el ${tipoUsuario}.`, 'error');
+      }
+    });
+  }
+
+  private actualizarListaUsuarios(userId: number, tipo: 'jefe' | 'checador') {
+    if (tipo === 'jefe') {
+      this.jefesGrupo = this.jefesGrupo.filter(jefe => jefe.id !== userId);
+    } else {
+      this.checadores = this.checadores.filter(checador => checador.id !== userId);
+      this.filteredChecadores = [...this.checadores];
+    }
+    this.calculateTotalPages();
+  }
+
+  /**
+   * Función para mostrar un toast de notificación.
+   * Se inyecta el mensaje y se asigna la clase según el tipo: 'success' o 'error'.
+   */
+  private mostrarToast(mensaje: string, tipo: 'success' | 'error'): void {
+    const toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${tipo}`;
+    toast.innerHTML = `
+      ${mensaje}
+      <button class="close-btn">&times;</button>
+    `;
+
+    // Agrega el toast al contenedor
+    toastContainer.appendChild(toast);
+
+    // Permitir cierre manual del toast
+    toast.querySelector('.close-btn')?.addEventListener('click', () => {
+      toast.remove();
+    });
+
+    // Elimina automáticamente el toast después de 5 segundos
+    setTimeout(() => toast.remove(), 5000);
+  }
+
+  openEditModal(user: any, userType: 'jefe' | 'checador'): void {
+    if (userType === 'jefe') {
+      // Configura los campos con los datos actuales del jefe, incluyendo el ID
+      this.modal.jefeId = user.id;
+      this.modal.jefeName = user.name;
+      this.modal.jefeEmail = user.email;
+      this.modal.jefeCarrera = user.carrera;
+      this.modal.jefeGrupo = user.grupo;
+      this.modal.editMode = true;
+      this.modal.openModal('jefe');
+    } else {
+      // Configura los campos del checador, asignando su ID si existe
+      this.modal.checador.id = user.id;
+      this.modal.checador.name = user.name;
+      this.modal.checador.email = user.email;
+      this.modal.editModeChecador = true;
+      this.modal.openModal('checador');
+    }
+  }
+
+  onJefeUpdated(updatedJefe: any): void {
+    const index = this.jefesGrupo.findIndex(jefe => jefe.id === updatedJefe.id);
+    if (index !== -1) {
+      this.jefesGrupo[index] = updatedJefe;
+    } else {
+      this.jefesGrupo.push(updatedJefe);
+    }
+  }
 }

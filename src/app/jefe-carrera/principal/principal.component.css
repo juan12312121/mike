@@ -19,7 +19,7 @@
     }
 
     .main-container {
-        max-width: 1350px;
+        max-width: 1250px;
         margin: 0 auto;
         background-color: rgba(255, 255, 255, 0.95);
         border-radius: 10px;
@@ -354,6 +354,80 @@
     .tab-content.active {
         display: block;
     }
+
+
+/* Estilos para el contenedor del toast */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Estilos generales del toast */
+  .toast {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.5s ease forwards, fadeOut 0.5s ease 4.5s forwards;
+  }
+  
+  /* Estilos para el toast de éxito */
+  .toast.success {
+    background: #28a745;
+  }
+  
+  /* Estilos para el toast de error */
+  .toast.error {
+    background: #dc3545;
+  }
+  
+  /* Botón de cierre dentro del toast */
+  .toast .close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  /* Animación para que el toast se deslice desde la derecha */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Animación para que el toast se desvanezca y se deslice hacia la derecha */
+  /* Animación para que el toast se desvanezca, se deslice hacia la derecha y se vuelva verde al borrarse */
+@keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+      background: #28a745; /* Color verde */
+    }
+  }
+  
 
     @media screen and (max-width: 992px) {
         .sidebar {

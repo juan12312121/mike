@@ -11,10 +11,12 @@ export class AutenticacionService {
     throw new Error('Method not implemented.');
   }
 
-  private loginUrl = 'http://localhost:3000/api/auth/login';    // URL del backend para login
-  private registerUrl = 'http://localhost:3000/api/auth/register'; // URL del backend para registro
-  private jefesGrupoUrl = 'http://localhost:3000/api/auth/jefes-grupo'; // URL del backend para obtener todos los jefes de grupo
+  private loginUrl = 'http://localhost:3000/api/auth/login';
+  private registerUrl = 'http://localhost:3000/api/auth/register';
+  private jefesGrupoUrl = 'http://localhost:3000/api/auth/jefes-grupo';
   private checadoresUrl = 'http://localhost:3000/api/auth/checadores';
+  private updateUserUrl = 'http://localhost:3000/api/auth/usuarios'; // Base URL para actualizar usuarios
+  private deleteUserUrl = 'http://localhost:3000/api/auth/usuarios'; // Base URL para eliminar usuarios
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -122,4 +124,17 @@ export class AutenticacionService {
   getChecadores(): Observable<any> {
     return this.http.get<any>(this.checadoresUrl, { headers: this.getHeaders() });
   }
+
+  updateUser(userId: number, userData: any): Observable<any> {
+    const url = `${this.updateUserUrl}/${userId}`;
+    return this.http.put(url, userData, { headers: this.getHeaders() });
+  }
+
+  // Función para eliminar un usuario
+  deleteUser(userId: number): Observable<any> {
+    const url = `${this.deleteUserUrl}/${userId}`;
+    return this.http.delete(url, { headers: this.getHeaders() });
+  }
+  
+  
 }
