@@ -1,0 +1,113 @@
+<!-- Sidebar component - mantenido como está -->
+<app-aside></app-aside>
+  
+<!-- Contenido principal - Wrapper del componente Angular -->
+<div class="main-content">
+  <div class="container">
+    <!-- Paso 1: Definir Formato de Horario -->
+    <div class="card step-card" id="paso-1">
+      <h1 class="page-title">Gestión de Horarios - Formato de Horario</h1>
+      
+      <div class="step-indicator">
+        <div class="step active">
+          <div class="step-circle">1</div>
+          <div class="step-label">Definir Formato de Horario</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">Información General</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Asignación de Materias</div>
+        </div>
+      </div>
+      
+      <div id="alerta-error-paso1" class="alert alert-error">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>Por favor, complete todos los campos requeridos.</span>
+      </div>
+      
+      <div class="grid-layout">
+        <div class="card">
+          <h2><i class="fas fa-clock"></i> Crear Formato de Horario</h2>
+          <p>Defina los rangos de hora que se utilizarán para las clases. Este paso es obligatorio antes de registrar el horario de un grupo.</p>
+          
+          <div class="format-name-container">
+            <div class="form-group">
+              <label for="nombre-formato">Nombre del Formato:</label>
+              <input type="text" id="nombre-formato" placeholder="Ej: Turno Matutino, Turno Vespertino, etc.">
+            </div>
+            <button id="guardar-formato" class="btn-success">Guardar Formato</button>
+          </div>
+          
+          <div class="saved-formats" id="formatos-guardados">
+            <h3>Formatos Guardados</h3>
+            <!-- Formatos guardados aparecerán aquí -->
+          </div>
+          
+          <div class="form-group">
+            <label>Agregar Rango de Hora:</label>
+            <div class="time-inputs">
+              <div class="form-group">
+                <label for="hora-inicio">Hora de Inicio:</label>
+                <input type="time" id="hora-inicio">
+              </div>
+              <div class="form-group">
+                <label for="hora-fin">Hora de Fin:</label>
+                <input type="time" id="hora-fin">
+              </div>
+            </div>
+          </div>
+          
+          <button id="agregar-hora" class="btn-icon">
+            <i class="fas fa-plus"></i>
+            Agregar Rango de Hora
+          </button>
+          
+          <div class="hours-container" id="horas-container">
+            <div class="hour-item">
+              <span class="hour-range">No hay rangos definidos</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card preview-card">
+          <h2><i class="fas fa-eye"></i> Vista Previa del Formato</h2>
+          <p>Este es el formato de horario que utilizará para asignar materias y profesores.</p>
+          
+          <div class="form-group">
+            <label>Formato Seleccionado:</label>
+            <div id="nombre-formato-seleccionado" class="selected-format">
+              No hay formato seleccionado
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Rangos de Hora Definidos:</label>
+            <div id="preview-horas-container" class="hours-container">
+              <div class="hour-item">
+                <span class="hour-range">No hay rangos definidos</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="actions-container">
+            <button id="nuevo-formato" class="btn-secondary">Crear Nuevo Formato</button>
+            <button id="continuar-paso2" class="btn-success" >
+              Siguiente paso <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- Paso 2: Información General -->
+    <app-paso2></app-paso2>
+
+    
+    <!-- Paso 3: Aquí deberías agregar el contenido para el paso 3 -->
+    
+  </div>
+</div>

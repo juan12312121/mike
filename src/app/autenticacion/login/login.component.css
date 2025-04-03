@@ -6,6 +6,9 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #E8F9FD 0%, #57C5B6 100%);
     perspective: 1000px;
 }

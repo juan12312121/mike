@@ -1,0 +1,136 @@
+
+<div class="card step-card" id="paso-2">
+    <h1 class="page-title">Gestión de Horarios - Información General</h1>
+    
+    <div class="step-indicator">
+      <div class="step completed">
+        <div class="step-circle">1</div>
+        <div class="step-label">Definir Formato de Horario</div>
+      </div>
+      <div class="step active">
+        <div class="step-circle">2</div>
+        <div class="step-label">Información General</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-label">Asignación de Materias</div>
+      </div>
+    </div>
+    
+    <div id="alerta-error-paso2" class="alert alert-error">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>Por favor, complete todos los campos requeridos.</span>
+    </div>
+    
+    <div class="grid-layout">
+      <div class="card">
+        <h2><i class="fas fa-info-circle"></i> Información General</h2>
+        <p>Proporcione la información general del horario para continuar con la asignación de materias.</p>
+        
+        <div class="form-group">
+          <label for="carrera">Carrera:</label>
+          <select id="carrera" class="form-control">
+            <option value="">Seleccione una carrera</option>
+            <option value="informatica">Ingeniería Informática</option>
+            <option value="civil">Ingeniería Civil</option>
+            <option value="industrial">Ingeniería Industrial</option>
+            <option value="administracion">Administración de Empresas</option>
+            <option value="contabilidad">Contabilidad</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="semestre">Semestre:</label>
+          <select id="semestre" class="form-control">
+            <option value="">Seleccione un semestre</option>
+            <option value="1">Primer Semestre</option>
+            <option value="2">Segundo Semestre</option>
+            <option value="3">Tercer Semestre</option>
+            <option value="4">Cuarto Semestre</option>
+            <option value="5">Quinto Semestre</option>
+            <option value="6">Sexto Semestre</option>
+            <option value="7">Séptimo Semestre</option>
+            <option value="8">Octavo Semestre</option>
+            <option value="9">Noveno Semestre</option>
+            <option value="10">Décimo Semestre</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="grupo">Grupo:</label>
+          <input type="text" id="grupo" class="form-control" placeholder="Ej: A, B, C...">
+        </div>
+        
+        <div class="alert alert-success">
+          <i class="fas fa-info-circle"></i>
+          <span>Complete la información general antes de agregar materias al horario.</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2><i class="fas fa-calendar-alt"></i> Detalles del Horario</h2>
+        <p>Configure los detalles adicionales para la programación de clases.</p>
+        
+        <div class="form-group">
+          <label for="periodo">Periodo Académico:</label>
+          <select id="periodo" class="form-control">
+            <option value="">Seleccione un periodo</option>
+            <option value="2025-1">2025-1</option>
+            <option value="2025-2">2025-2</option>
+            <option value="2026-1">2026-1</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="formato-horario">Formato de Horario:</label>
+          <select id="formato-horario" class="form-control">
+            <option value="">Seleccione un formato</option>
+            <option value="matutino">Turno Matutino (7:00 - 13:00)</option>
+            <option value="vespertino">Turno Vespertino (13:00 - 19:00)</option>
+            <option value="nocturno">Turno Nocturno (18:00 - 22:00)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Días de Clase:</label>
+          <div class="schedule-days">
+            <div class="day-checkbox">
+              <input type="checkbox" id="lunes" value="lunes">
+              <label for="lunes">Lunes</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="martes" value="martes">
+              <label for="martes">Martes</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="miercoles" value="miercoles">
+              <label for="miercoles">Miércoles</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="jueves" value="jueves">
+              <label for="jueves">Jueves</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="viernes" value="viernes">
+              <label for="viernes">Viernes</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="sabado" value="sabado">
+              <label for="sabado">Sábado</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid-full">
+        <div class="actions-container">
+          <button id="volver-paso1" class="btn-secondary">
+            <i class="fas fa-arrow-left"></i> Volver al Paso Anterior
+          </button>
+          <button id="continuar-paso3" class="btn-success">
+            Continuar a Asignación de Materias <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

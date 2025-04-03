@@ -97,48 +97,57 @@ export class ModalComponent {
     this.showAlert = false;
   }
   
-  registerJefeGrupo(): void {
-    if (this.jefeName && this.jefeEmail && this.jefePassword && this.jefeCarrera && this.jefeGrupo) {
-      this.authService.register(
-        this.jefeName.trim(),
-        this.jefeEmail.trim(),
-        this.jefePassword,
-        'jefe de grupo',
-        this.jefeCarrera.trim(),
-        this.jefeGrupo.trim()
-      ).subscribe({
-        next: (res) => {
-          const nuevoJefe = {
-            id: res.id,
-            name: this.jefeName,
-            email: this.jefeEmail,
-            carrera: this.jefeCarrera,
-            grupo: this.jefeGrupo
-          };
-          this.newJefeAdded.emit(nuevoJefe);
-          
-          // Mostrar alerta global
-          this.showGlobalAlert('Jefe de grupo agregado correctamente', 'success');
-          
-          this.successMessage = 'Jefe registrado exitosamente!';
-          this.clearMessages();
-          this.resetJefeGrupoForm();
-          this.closeModal();
-        },
-        error: (err) => {
-          this.errorMessage = 'Hubo un error al registrar al jefe. Intente de nuevo más tarde.';
-          
-          // Mostrar alerta global de error
-          this.showGlobalAlert('Error al agregar jefe de grupo', 'error');
-          
-          this.clearMessages();
-        }
-      });
-    } else {
-      this.errorMessage = 'Por favor, complete todos los campos.';
-      this.clearMessages();
-    }
+ registerJefeGrupo(): void {
+  console.log("Iniciando registro de jefe de grupo...");
+  console.log("Datos ingresados:", {
+    name: this.jefeName,
+    email: this.jefeEmail,
+    password: this.jefePassword,
+    carrera: this.jefeCarrera,
+    grupo: this.jefeGrupo
+  });
+
+  if (this.jefeName && this.jefeEmail && this.jefePassword && this.jefeCarrera && this.jefeGrupo) {
+    this.authService.register(
+      this.jefeName.trim(),
+      this.jefeEmail.trim(),
+      this.jefePassword,
+      'jefe de grupo',
+      this.jefeCarrera.trim(),
+      this.jefeGrupo.trim()
+    ).subscribe({
+      next: (res) => {
+        console.log("Respuesta exitosa del servidor:", res);
+
+        const nuevoJefe = {
+          id: res.id,
+          name: this.jefeName,
+          email: this.jefeEmail,
+          carrera: this.jefeCarrera,
+          grupo: this.jefeGrupo
+        };
+        this.newJefeAdded.emit(nuevoJefe);
+
+        this.showGlobalAlert('Jefe de grupo agregado correctamente', 'success');
+        this.successMessage = 'Jefe registrado exitosamente!';
+        this.clearMessages();
+        this.resetJefeGrupoForm();
+        this.closeModal();
+      },
+      error: (err) => {
+        console.error("Error en el registro:", err);
+        this.errorMessage = 'Hubo un error al registrar al jefe. Intente de nuevo más tarde.';
+        this.showGlobalAlert('Error al agregar jefe de grupo', 'error');
+        this.clearMessages();
+      }
+    });
+  } else {
+    console.warn("Faltan datos en el formulario.");
+    this.errorMessage = 'Por favor, complete todos los campos.';
+    this.clearMessages();
   }
+}
+
   
   updateJefeGrupo(): void {
     if (this.jefeName && this.jefeEmail && this.jefeCarrera && this.jefeGrupo && this.jefeId !== null) {

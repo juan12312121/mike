@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './autenticacion/login/login.component';
 import { ChecadorComponent } from './checador/checador.component';
+import { HorariosComponent } from './jefe-carrera/horarios/horarios.component';
 import { MateriasComponent } from './jefe-carrera/materias/materias.component';
 import { PrincipalComponent } from './jefe-carrera/principal/principal.component';
 import { ProfesoresComponent } from './jefe-carrera/profesores/profesores.component';
@@ -15,5 +16,6 @@ export const appRoutes: Routes = [
   { path: 'jefe-carrera', component: PrincipalComponent },
   { path: 'asistencias', component: RegistroAsistenciasComponent },
   {path: 'profesores', component: ProfesoresComponent},
-  {path: 'materias', component: MateriasComponent}
+  {path: 'materias', component: MateriasComponent},
+  {path: 'horarios', component: HorariosComponent}
 ];
