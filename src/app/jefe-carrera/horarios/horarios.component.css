@@ -55,7 +55,6 @@ label {
   margin-bottom: 8px;
   font-weight: 500;
   color: #34495e;
-  display: flex;
 }
 
 input, select, button {
